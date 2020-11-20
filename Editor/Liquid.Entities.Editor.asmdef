@@ -1,0 +1,16 @@
+{
+    "name": "Liquid.Entities.Editor",
+    "references": [
+        "GUID:d8b63aba1907145bea998dd612889d6b",
+        "GUID:2b595651f18fcfcb68ea410dd564361a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

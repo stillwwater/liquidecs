@@ -1,0 +1,32 @@
+{
+  "name": "io.stillwwater.liquidecs",
+  "version": "1.0.0",
+  "displayName": "Liquid Entities",
+  "description": "A tiny Entity Component System library for Unity supporting Game Objects as entities",
+  "unity": "2019.3",
+  "dependencies": {
+    "com.unity.mathematics": "1.1.0"
+  },
+  "type": "library",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stillwwater/liquidecs.git"
+  },
+  "author": {
+    "name": "stillwwater",
+    "email": "stillwwater@gmail.com",
+    "url": "https://github.com/stillwwater"
+  },
+  "keywords": [
+    "ecs",
+    "liquid",
+    "entity component system"
+  ],
+  "samples": [
+    {
+      "displayName": "Demo",
+      "description": "Particle System Demo",
+      "path": "Samples~/Demo"
+    }
+  ]
+}
