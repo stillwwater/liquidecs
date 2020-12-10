@@ -26,6 +26,7 @@ public struct Active {}
 public abstract class EntitySystem {
     public virtual void Load(World world) {}
     public virtual void Update(World world) {}
+    public virtual void FixedUpdate(World world) {}
     public virtual void Draw(World world) {}
     public virtual void Unload(World world) {}
 }
@@ -106,9 +107,17 @@ public partial class World : MonoBehaviour {
 
     // The default MonoBehaviour update loop for a World. You can define an
     // Update() function in a world MonoBehaviour to override this function.
-    public void Update() {
+    public virtual void Update() {
         UpdateSystems();
         DrawSystems();
+        CollectUnusedEntities();
+    }
+
+    // The default MonoBehaviour fixed update loop for a World. You can define
+    // a FixedUpdate() function in a world MonoBehaviour to override this
+    // function.
+    public virtual void FixedUpdate() {
+        UpdateSystemsFixed();
         CollectUnusedEntities();
     }
 
@@ -116,7 +125,7 @@ public partial class World : MonoBehaviour {
     // call `DestroyAllSystems()` which will call `Unload(world)` for each
     // system. You can define `OnDestroy()` in a world to override this
     // function.
-    public void OnDestroy() {
+    public virtual void OnDestroy() {
         DestroyAllSystems();
     }
 
@@ -825,6 +834,20 @@ public partial class World : MonoBehaviour {
             var system = activeSystems[i];
             Profiler.BeginSample(activeSystemNames[i]);
             system.Update(this);
+            Profiler.EndSample();
+        }
+        Profiler.EndSample();
+    }
+
+    // Default fixed update loop. Calls fixed update on all systems in the
+    // world. For more control over the update loop, use `Systems()` to get
+    // a list of all systems in the world.
+    public void UpdateSystemsFixed() {
+        Profiler.BeginSample("EntitySystem.FixedUpdate()");
+        for (int i = 0; i < activeSystems.Count; ++i) {
+            var system = activeSystems[i];
+            Profiler.BeginSample(activeSystemNames[i]);
+            system.FixedUpdate(this);
             Profiler.EndSample();
         }
         Profiler.EndSample();
